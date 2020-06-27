@@ -13,13 +13,15 @@ app.host = '0.0.0.0'
 @socketIo.on("message")
 def handleMessage(msg):
     print(msg)
-    send("aaaa", broadcast=True)
+    # use send only after confirming not every time
+    # send("aaaa", broadcast=True)
     return None
 
 @socketIo.on("image")
 def handleMessage(img):
     print("hello")
-    send("aaaa", broadcast=True)
+    # use send only after confirming not every time
+    # send("aaaa", broadcast=True)
     return None
 
 if __name__ == '__main__':

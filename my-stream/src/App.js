@@ -8,6 +8,17 @@ let socket = io.connect(`${endPoint}`);
 const App = () => {
   var keep = false;
   const webcamRef = React.useRef(null);
+  const [messages, setMessages] = useState(["Hello And Welcome"]);
+
+  useEffect(() => {
+    getMessages();
+  }, [messages.length]);
+
+  const getMessages = () => {
+    socket.on("message", msg => {
+      setMessages([...messages, msg]);
+    });
+  };
 
   // On Click
   const onClick = (img) => {
@@ -47,6 +58,12 @@ const App = () => {
 
   return (
     <>
+    {messages.length > 0 &&
+        messages.map(msg => (
+          <div>
+            <p>{msg}</p>
+          </div>
+        ))}
     <Webcam
         audio={false}
         height={720}
